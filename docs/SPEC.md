@@ -25,9 +25,9 @@
 
 ## Definition of done (gate before the repo goes public)
 
-- [ ] Runs end to end from a clean GitHub checkout; README steps verified
+- [x] Runs end to end from a clean GitHub checkout; README steps verified
 - [x] pytest passes (35), no hard-coded results
 - [x] Data labelled synthetic; policy labelled illustrative; no firm named
 - [x] Diagram, ADRs, FINDINGS with numbers from actual runs
-- [ ] Every commit scanned for firm or application terms, contact details and secrets; `.env` never committed
-- [ ] Independent review passed
+- [x] Every commit scanned for firm or application terms, contact details and secrets; `.env` never committed
+- [x] Independent review passed
