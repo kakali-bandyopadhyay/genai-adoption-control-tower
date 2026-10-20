@@ -1,23 +1,76 @@
 {
-  "version": "policy-v1",
+  "version": "policy-v2",
   "note": "Illustrative portfolio policy for a synthetic hedge-fund technology centre. Weights, thresholds and rates are assumptions for demonstration, not any firm's policy.",
   "scoring": {
-    "weights": {"value": 0.40, "feasibility": 0.25, "readiness": 0.20, "differentiation": 0.15},
-    "risk_tier": {"low_max": 2, "medium_max": 3}
+    "weights": {
+      "value": 0.4,
+      "feasibility": 0.25,
+      "readiness": 0.2,
+      "differentiation": 0.15
+    },
+    "risk_tier": {
+      "low_max": 2,
+      "medium_max": 3
+    }
   },
   "sourcing": {
     "rule": "buy when the capability is commodity (differentiation <= 2) and data sensitivity <= 3; build when differentiation >= 4 or data sensitivity = 5; otherwise hybrid (buy the model, build the workflow and controls)"
   },
-  "stages": ["pilot", "limited_production", "scale"],
+  "stages": [
+    "pilot",
+    "limited_production",
+    "scale"
+  ],
   "gates": {
-    "low":    {"min_eval_pass": 0.92, "max_override": 0.20, "min_adoption": 0.40},
-    "medium": {"min_eval_pass": 0.95, "max_override": 0.15, "min_adoption": 0.45},
-    "high":   {"min_eval_pass": 0.98, "max_override": 0.10, "min_adoption": 0.50, "human_review_required": true}
+    "low": {
+      "min_eval_pass": 0.92,
+      "max_override": 0.2,
+      "min_adoption": 0.4
+    },
+    "medium": {
+      "min_eval_pass": 0.95,
+      "max_override": 0.15,
+      "min_adoption": 0.45
+    },
+    "high": {
+      "min_eval_pass": 0.98,
+      "max_override": 0.1,
+      "min_adoption": 0.5,
+      "human_review_required": true
+    }
   },
   "decision": {
     "window_weeks": 4,
     "consecutive_weeks_to_expand": 3,
     "adoption_plateau_delta": 0.03
   },
-  "value": {"loaded_cost_per_hour_usd": 90, "rate_note": "illustrative blended rate used only to translate hours into money; hours are the primary measure"}
+  "value": {
+    "loaded_cost_per_hour_usd": 90,
+    "rate_note": "illustrative blended rate used only to translate hours into money; hours are the primary measure"
+  },
+  "costs": {
+    "note": "Illustrative total-cost-of-ownership assumptions per live use case over the review horizon; not quotes or any firm's costs.",
+    "horizon_weeks": 10,
+    "licence_usd_per_active_user_month": {
+      "buy": 30,
+      "hybrid": 15,
+      "build": 0
+    },
+    "infrastructure_usd_per_month": {
+      "buy": 0,
+      "hybrid": 400,
+      "build": 800
+    },
+    "build_one_off_hours": {
+      "buy": 0,
+      "hybrid": 160,
+      "build": 320
+    },
+    "support_hours_per_week": 4,
+    "change_enablement_one_off_hours": 40,
+    "minutes_saved_sensitivity": 0.3
+  },
+  "follow_up": {
+    "escalate_after_consecutive_misses": 2
+  }
 }

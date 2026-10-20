@@ -1,0 +1,104 @@
+[
+  {
+    "id": "S1",
+    "name": "UC02 quality fixed",
+    "question": "What does fixing trade-break triage quality buy?",
+    "changes": [
+      {
+        "target": "telemetry",
+        "use_case": "UC02",
+        "from_week": 7,
+        "field": "eval_pass_rate",
+        "op": "set",
+        "value": 0.985
+      },
+      {
+        "target": "telemetry",
+        "use_case": "UC02",
+        "from_week": 7,
+        "field": "override_rate",
+        "op": "set",
+        "value": 0.08
+      }
+    ]
+  },
+  {
+    "id": "S2",
+    "name": "UC03 without the week-8 incident (counterfactual)",
+    "question": "Is the control incident the only thing holding surveillance triage back?",
+    "changes": [
+      {
+        "target": "telemetry",
+        "use_case": "UC03",
+        "from_week": 1,
+        "field": "incidents_critical",
+        "op": "set",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "S3",
+    "name": "Medium-risk adoption bar lowered to 20%",
+    "question": "What if we simply lowered the adoption bar for medium risk instead of fixing adoption?",
+    "changes": [
+      {
+        "target": "policy",
+        "path": [
+          "gates",
+          "medium",
+          "min_adoption"
+        ],
+        "op": "set",
+        "value": 0.2
+      }
+    ]
+  },
+  {
+    "id": "S4",
+    "name": "Medium-risk eval bar raised to 97%",
+    "question": "What if Model Risk tightens the medium-risk quality bar?",
+    "changes": [
+      {
+        "target": "policy",
+        "path": [
+          "gates",
+          "medium",
+          "min_eval_pass"
+        ],
+        "op": "set",
+        "value": 0.97
+      }
+    ]
+  },
+  {
+    "id": "S5",
+    "name": "Minutes saved 30% lower",
+    "question": "Does a weaker time saving change any decision or only the value?",
+    "changes": [
+      {
+        "target": "telemetry",
+        "use_case": "*",
+        "from_week": 1,
+        "field": "avg_minutes_saved",
+        "op": "scale",
+        "value": 0.7
+      }
+    ]
+  },
+  {
+    "id": "S6",
+    "name": "Model prices triple",
+    "question": "Do higher model prices change the decisions or the value case?",
+    "changes": [
+      {
+        "target": "telemetry",
+        "use_case": "*",
+        "from_week": 1,
+        "field": "cost_usd",
+        "op": "scale",
+        "value": 3.0
+      }
+    ]
+  }
+]

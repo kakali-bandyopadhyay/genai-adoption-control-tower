@@ -1,0 +1,98 @@
+[
+  {
+    "review": "week 6",
+    "date": "2026-09-14",
+    "use_case": "UC01",
+    "decision": "FIX",
+    "rationale": "Adoption 22% and flat; quality fine",
+    "owner": "Research tooling lead",
+    "decided_by": "GenAI steering group",
+    "review_by": "week 10",
+    "expect": {
+      "metric": "adoption",
+      "op": ">=",
+      "target": 0.3
+    },
+    "provenance": "synthetic"
+  },
+  {
+    "review": "week 6",
+    "date": "2026-09-14",
+    "use_case": "UC02",
+    "decision": "FIX",
+    "rationale": "Eval pass 95% against a 98% high-risk bar; overrides 20%",
+    "owner": "AI engineering lead",
+    "decided_by": "GenAI steering group",
+    "review_by": "week 10",
+    "expect": {
+      "metric": "eval_pass_rate",
+      "op": ">=",
+      "target": 0.98
+    },
+    "provenance": "synthetic"
+  },
+  {
+    "review": "week 6",
+    "date": "2026-09-14",
+    "use_case": "UC03",
+    "decision": "CONTINUE",
+    "rationale": "Quality strong; adoption 47% below the 50% high-risk bar",
+    "owner": "Compliance control owner",
+    "decided_by": "GenAI steering group",
+    "review_by": "week 10",
+    "expect": {
+      "metric": "critical_incidents",
+      "op": "==",
+      "target": 0
+    },
+    "provenance": "synthetic"
+  },
+  {
+    "review": "week 6",
+    "date": "2026-09-14",
+    "use_case": "UC04",
+    "decision": "CONTINUE",
+    "rationale": "Adoption 39%, just under the 40% low-risk bar",
+    "owner": "Use-case product owner",
+    "decided_by": "GenAI steering group",
+    "review_by": "week 10",
+    "expect": {
+      "metric": "adoption",
+      "op": ">=",
+      "target": 0.4
+    },
+    "provenance": "synthetic"
+  },
+  {
+    "review": "week 6",
+    "date": "2026-09-14",
+    "use_case": "UC05",
+    "decision": "CONTINUE",
+    "rationale": "Strong at limited production; confirm overrides stay low before scale",
+    "owner": "Investor relations lead",
+    "decided_by": "GenAI steering group",
+    "review_by": "week 10",
+    "expect": {
+      "metric": "override_rate",
+      "op": "<=",
+      "target": 0.1
+    },
+    "provenance": "synthetic"
+  },
+  {
+    "review": "week 2",
+    "date": "2026-08-17",
+    "use_case": "UC01",
+    "decision": "FIX",
+    "rationale": "Adoption 15% after launch",
+    "owner": "Research tooling lead",
+    "decided_by": "GenAI steering group",
+    "review_by": "week 6",
+    "expect": {
+      "metric": "adoption",
+      "op": ">=",
+      "target": 0.25
+    },
+    "provenance": "synthetic"
+  }
+]

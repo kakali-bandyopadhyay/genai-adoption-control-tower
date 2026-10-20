@@ -2,7 +2,7 @@
 
 All numbers come from `python -m tower build` on the committed inputs. Telemetry is synthetic with conditions planted on purpose; the UC02 offline baseline is a real evaluation of the author's own prototype.
 
-## Portfolio (9 use cases, policy-v1)
+## Portfolio (9 use cases, policy-v2)
 
 | Rank | Use case | Score | Risk tier | Sourcing | Stage |
 |---|---|---|---|---|---|
@@ -37,18 +37,42 @@ All numbers come from `python -m tower build` on the committed inputs. Telemetry
 
 **Finding 5 – low adoption needs adoption work, not model work.** UC01's quality clears its bar; usage has been flat at 22% for four weeks. The actions are champions per team, the tool embedded in the existing workflow, short role-based sessions and a weekly feedback loop.
 
-**Finding 6 – value is counted in hours first.** 1,860 hours saved over ten weeks against $115 of model run cost. Money values (an illustrative $90 an hour) are shown only as a translation; people, licences and infrastructure are not included, so the ratio flatters GenAI and is labelled as such.
+**Finding 6 – value is counted in hours first.** 1,860 hours saved over ten weeks against $115 of model run cost. Money values (an illustrative $90 an hour) are shown only as a translation. Model run cost alone flatters GenAI, so B02 adds total cost of ownership (Finding 9).
+
+## B02 – trust, challenge, act
+
+**Finding 7 – every number now has a definition, an owner and a provenance.** The register lists numerator, denominator, window, source and owner for 9 metrics, and marks each as synthetic, assumed or measured. Only two values are measured: UC02's offline evaluation and cost per task, both from the author's prototype.
+
+**Finding 8 – scenarios show what drives each decision.**
+
+| Scenario | Decision change | Illustrative portfolio net value |
+|---|---|---|
+| S1 UC02 quality fixed (eval 98.5%, overrides 8% from week 7) | UC02 FIX (quality) → EXPAND | unchanged |
+| S2 UC03 without the week-8 incident (counterfactual) | UC03 PAUSE → EXPAND: the incident is the only blocker | unchanged |
+| S3 Medium-risk adoption bar lowered to 20% | UC01 FIX (adoption) → EXPAND: would expand a tool 78% of research does not use | unchanged |
+| S4 Medium-risk eval bar raised to 97% | UC01 FIX (adoption) → FIX (quality) | unchanged |
+| S5 Minutes saved 30% lower | none | $45,845 → −$4,366 |
+| S6 Model prices triple | none | $45,845 → $45,614 |
+
+The gates are robust to cost and time-saving assumptions; the value case is not. Model price barely matters next to people time.
+
+**Finding 9 – with total cost of ownership, builds do not pay back in 10 weeks.** Assumed total cost over 10 weeks is about $121.5k across the five live use cases. The two builds (UC02, UC03) each carry $28,800 of one-off build effort and are net negative over 10 weeks, but UC02 is positive excluding one-off costs ($24,826): it needs a longer horizon, not a different decision. The bought policy Q&A (UC04) has the best net value ($23,670 to $56,562 across the ±30% range).
+
+**Finding 10 – adoption gaps are concentrated in cohorts.** UC01 is at 22% overall, but Equity research is at 40% while Credit (10%) and Macro (7%) research barely use it. UC02's Reconciliations team is at 20% while both Settlements teams are above the bar. Each lagging cohort has a named intervention (champion, workflow embedding, training, feedback loop) with owner, due date and success measure.
+
+**Finding 11 – decisions are followed up, and repeat misses escalate.** Of six recorded expectations, two were met (UC04 adoption, UC05 overrides) and four missed. UC01 missed its adoption target at weeks 6 and 10, so it is escalated to the sponsor. UC03's "no critical incidents" expectation was missed by the week-8 incident – the follow-up and the pause agree.
 
 ## Tests
 
-24 passed: input validation (bad scores, impossible counts), score formula, risk tiers, sourcing rule, the five planted decisions, incident precedence, consecutive-week rule, incident window, human review on high tier, baseline gap, value reconciliation, outputs tied to the input hash, determinism.
+35 passed. B01: input validation, score formula, risk tiers, sourcing rule, the five planted decisions, incident precedence, consecutive-week rule, incident window, human review on high tier, baseline gap, value reconciliation, outputs tied to the input hash, determinism. B02: metric register coverage and provenance, unregistered measures rejected, cohorts reconcile to telemetry, the six scenario outcomes, scenarios never modify inputs, a scenario that matches nothing fails, cost lines add up, one-off build costs, cohorts below bar have interventions, follow-up statuses and escalation, record validation and append-only, new dashboard and memo sections.
 
 ## Limitations and next steps
 
 | Limitation | Next step |
 |---|---|
 | Synthetic telemetry with planted conditions | Feed from real usage logs (events per user, task outcome, override reason) |
-| Minutes saved per task are assumptions | Time-and-motion sample per use case before and after |
+| Minutes saved per task are assumptions (±30% shown) | Time-and-motion sample per use case before and after |
 | Thresholds illustrative | Set with risk, compliance and model-risk owners; version them in policy.json |
-| Model run cost only | Add licences, infrastructure and support for total cost of ownership |
-| One review week | Trend view across reviews and a decision history per use case |
+| Costs are assumptions in policy.json | Replace with finance actuals per use case |
+| Cohort and decision history are snapshots | Weekly cohort telemetry and a full decision history across reviews |
+| Scenarios are pre-defined | An interactive scenario panel (kept static here so results are reproducible) |

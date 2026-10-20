@@ -19,7 +19,7 @@ def test_build_writes_three_outputs_tied_to_inputs(tmp_path):
     memo = (tmp_path / "decision_memo.md").read_text()
     log = json.loads((tmp_path / "decision_log.json").read_text())
     assert "Synthetic data" in html and "Synthetic data" in memo
-    assert log["inputs_sha256"] == data.fingerprint() == res["fingerprint"]
+    assert log["inputs_sha256"] == data.fingerprint_all() == res["fingerprint"]
     assert [d["decision"] for d in log["decisions"]] == ["PAUSE", "FIX", "FIX", "EXPAND", "EXPAND"]
     assert "expand 2, fix 2, pause 1" in memo and "## Decisions needed from leadership" in memo
     assert "champion" in memo                                   # adoption fix has adoption actions

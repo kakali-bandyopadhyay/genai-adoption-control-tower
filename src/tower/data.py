@@ -53,3 +53,50 @@ def fingerprint(d: Path = DATA) -> str:
     for name in ("policy.json", "use_cases.json", "telemetry.csv"):
         h.update((d / name).read_bytes())
     return h.hexdigest()
+
+
+def load_json(name: str, d: Path = DATA):
+    return json.loads((d / name).read_text(encoding="utf-8"))
+
+
+def load_all(d: Path = DATA) -> dict:
+    """Everything the tower reads, validated together (cross-file checks live here)."""
+    pol, ucs, rows = load_policy(d), load_use_cases(d), load_telemetry(d)
+    metrics = load_json("metrics.json", d)
+    cohorts = load_json("cohorts.json", d)
+    interventions = load_json("interventions.json", d)
+    register = load_json("decision_register.json", d)
+    scenarios = load_json("scenarios.json", d)
+    ids = {u["id"] for u in ucs}
+    metric_ids = {m["id"] for m in metrics}
+    for m in metrics:
+        for k in ("definition", "numerator", "denominator", "window", "source", "owner", "provenance"):
+            if not m.get(k):
+                raise ValueError(f"metric {m['id']}: {k} missing")
+    for x in interventions:
+        if x["use_case"] not in ids:
+            raise ValueError(f"intervention {x['id']}: unknown use case {x['use_case']}")
+        if x["measure"] not in metric_ids:
+            raise ValueError(f"intervention {x['id']}: measure {x['measure']} not in the metric register")
+        for k in ("owner", "due", "action"):
+            if not x.get(k):
+                raise ValueError(f"intervention {x['id']}: {k} missing")
+    for e in register:
+        if e["use_case"] not in ids or e["expect"]["metric"] not in metric_ids:
+            raise ValueError(f"decision register entry {e['use_case']} {e['review']}: unknown use case or metric")
+    last_week = max(r["week"] for r in rows)
+    for uc in {c["use_case"] for c in cohorts}:
+        cs = [c for c in cohorts if c["use_case"] == uc]
+        last = next(r for r in rows if r["use_case"] == uc and r["week"] == last_week)
+        if sum(c["eligible_users"] for c in cs) != last["eligible_users"] or sum(c["active_users"] for c in cs) != last["weekly_active_users"]:
+            raise ValueError(f"cohorts for {uc} do not add up to the week-{last_week} telemetry")
+    return {"policy": pol, "use_cases": ucs, "telemetry": rows, "metrics": metrics, "cohorts": cohorts,
+            "interventions": interventions, "register": register, "scenarios": scenarios}
+
+
+def fingerprint_all(d: Path = DATA) -> str:
+    h = hashlib.sha256()
+    for name in ("policy.json", "use_cases.json", "telemetry.csv", "metrics.json", "cohorts.json",
+                 "interventions.json", "decision_register.json", "scenarios.json"):
+        h.update((d / name).read_bytes())
+    return h.hexdigest()

@@ -1,0 +1,10 @@
+[
+  {"use_case": "UC01", "cohort": "Equity research", "eligible_users": 25, "active_users": 10},
+  {"use_case": "UC01", "cohort": "Credit research", "eligible_users": 20, "active_users": 2},
+  {"use_case": "UC01", "cohort": "Macro research", "eligible_users": 15, "active_users": 1},
+  {"use_case": "UC02", "cohort": "Settlements – EMEA", "eligible_users": 15, "active_users": 11},
+  {"use_case": "UC02", "cohort": "Settlements – Americas", "eligible_users": 15, "active_users": 9},
+  {"use_case": "UC02", "cohort": "Reconciliations", "eligible_users": 10, "active_users": 2},
+  {"use_case": "UC05", "cohort": "Investor relations", "eligible_users": 15, "active_users": 13},
+  {"use_case": "UC05", "cohort": "Legal reviewers", "eligible_users": 10, "active_users": 5}
+]
