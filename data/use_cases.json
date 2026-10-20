@@ -1,0 +1,22 @@
+[
+  {"id": "UC01", "name": "Research document summaries", "function": "Research", "description": "Summarise filings and earnings-call transcripts into a standard research note template with citations.",
+   "value": 4, "feasibility": 4, "readiness": 3, "differentiation": 2, "data_sensitivity": 2, "model_risk": 3, "stage": "limited_production", "eligible_users": 60},
+  {"id": "UC02", "name": "Trade-break triage assistant", "function": "Operations", "description": "Classify settlement and reconciliation breaks, propose the next action and route to the owner; actions behind an approval gate.",
+   "value": 5, "feasibility": 4, "readiness": 4, "differentiation": 4, "data_sensitivity": 4, "model_risk": 4, "stage": "pilot", "eligible_users": 40,
+   "baseline_eval": {"source": "personal prototype ops-exception-agent (offline evaluation)", "cases": 18, "runs": 3, "passed": 54, "cost_per_decision_usd": 0.0018,
+                     "finding": "15 of 54 runs (28%) claimed an action the system had not recorded before the fix; the execution log became the system of record"}},
+  {"id": "UC03", "name": "Surveillance alert triage", "function": "Compliance", "description": "Pre-sort trade and communications surveillance alerts, draft a disposition rationale for an analyst to approve.",
+   "value": 4, "feasibility": 3, "readiness": 3, "differentiation": 4, "data_sensitivity": 5, "model_risk": 5, "stage": "pilot", "eligible_users": 15},
+  {"id": "UC04", "name": "Policy and procedures Q&A", "function": "Compliance / all staff", "description": "Answer questions on internal policies with cited passages; no answer without a source.",
+   "value": 3, "feasibility": 5, "readiness": 5, "differentiation": 2, "data_sensitivity": 2, "model_risk": 2, "stage": "pilot", "eligible_users": 300},
+  {"id": "UC05", "name": "DDQ and RFP drafting", "function": "Investor relations", "description": "Draft due-diligence questionnaire answers from an approved answer library; every draft reviewed before release.",
+   "value": 4, "feasibility": 4, "readiness": 4, "differentiation": 3, "data_sensitivity": 3, "model_risk": 3, "stage": "limited_production", "eligible_users": 25},
+  {"id": "UC06", "name": "Code assistant for quant developers", "function": "Technology", "description": "IDE coding assistant with repository context, under existing code-review controls.",
+   "value": 4, "feasibility": 5, "readiness": 4, "differentiation": 1, "data_sensitivity": 4, "model_risk": 2, "stage": "backlog", "eligible_users": 200},
+  {"id": "UC07", "name": "Reconciliation exception explanations", "function": "Fund accounting", "description": "Explain NAV and cash reconciliation differences in plain language from the break data.",
+   "value": 3, "feasibility": 3, "readiness": 2, "differentiation": 3, "data_sensitivity": 4, "model_risk": 3, "stage": "backlog", "eligible_users": 35},
+  {"id": "UC08", "name": "Meeting notes and actions", "function": "All functions", "description": "Transcribe internal meetings and extract decisions and actions with owners.",
+   "value": 2, "feasibility": 5, "readiness": 5, "differentiation": 1, "data_sensitivity": 3, "model_risk": 2, "stage": "backlog", "eligible_users": 400},
+  {"id": "UC09", "name": "Pre-trade restriction lookup", "function": "Trading / Compliance", "description": "Natural-language lookup of restricted-list and trading-limit status before an order.",
+   "value": 3, "feasibility": 3, "readiness": 2, "differentiation": 3, "data_sensitivity": 5, "model_risk": 5, "stage": "backlog", "eligible_users": 50}
+]
