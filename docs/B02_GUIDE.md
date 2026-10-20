@@ -24,7 +24,7 @@
 | S3 Adoption bar lowered to 20% | UC01 → EXPAND – the wrong fix for a tool 78% of research does not use |
 | S4 Eval bar raised to 97% | UC01 FIX (adoption) → FIX (quality) |
 | S5 Minutes saved −30% | no decision changes; net value $45,845 → −$4,366 |
-| S6 Model prices ×3 | no decision changes; net value −$231 |
+| S6 Model prices ×3 | no decision changes; net value $45,845 → $45,614 (−$231) |
 
 **Why:** leaders challenge recommendations; the answer should come from the same logic, not a separate spreadsheet.
 
