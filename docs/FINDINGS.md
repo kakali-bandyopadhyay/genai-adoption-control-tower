@@ -62,9 +62,11 @@ The gates are robust to cost and time-saving assumptions; the value case is not.
 
 **Finding 11 – decisions are followed up, and repeat misses escalate.** Of six recorded expectations, two were met (UC04 adoption, UC05 overrides) and four missed. UC01 missed its adoption target at weeks 6 and 10, so it is escalated to the sponsor. UC03's "no critical incidents" expectation was missed by the week-8 incident – the follow-up and the pause agree.
 
+**Finding 12 – the workflow trace makes the order of checks visible.** Trade-break triage (UC02) stops at check 2: quality fails (96% vs 98%, 18% overrides), so its Reconciliations adoption gap (20%) is not the next problem to solve. Surveillance alert triage (UC03) stops at check 1: one critical incident outranks the best quality in the portfolio (98.5%). The trace also flags that UC03, a high-risk use case, has no recorded offline evaluation baseline. Walkthrough: [WORKFLOW_TRACE.md](WORKFLOW_TRACE.md).
+
 ## Tests
 
-35 passed. B01: input validation, score formula, risk tiers, sourcing rule, the five planted decisions, incident precedence, consecutive-week rule, incident window, human review on high tier, baseline gap, value reconciliation, outputs tied to the input hash, determinism. B02: metric register coverage and provenance, unregistered measures rejected, cohorts reconcile to telemetry, the six scenario outcomes, scenarios never modify inputs, a scenario that matches nothing fails, cost lines add up, one-off build costs, cohorts below bar have interventions, follow-up statuses and escalation, record validation and append-only, new dashboard and memo sections.
+44 passed. B01: input validation, score formula, risk tiers, sourcing rule, the five planted decisions, incident precedence, consecutive-week rule, incident window, human review on high tier, baseline gap, value reconciliation, outputs tied to the input hash, determinism. B02: metric register coverage and provenance, unregistered measures rejected, cohorts reconcile to telemetry, the six scenario outcomes, scenarios never modify inputs, a scenario that matches nothing fails, cost lines add up, one-off build costs, cohorts below bar have interventions, follow-up statuses and escalation, record validation and append-only, new dashboard and memo sections. Trace: trade-break and surveillance paths, the first failing check decides, trace agrees with every gate decision and with escalation, backlog stops before the gate, build writes traces and the dashboard section.
 
 ## Limitations and next steps
 

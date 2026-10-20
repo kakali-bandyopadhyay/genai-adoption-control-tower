@@ -51,7 +51,7 @@ def fingerprint(d: Path = DATA) -> str:
     """SHA-256 over the three input files, so every decision can be tied to the exact inputs it used."""
     h = hashlib.sha256()
     for name in ("policy.json", "use_cases.json", "telemetry.csv"):
-        h.update((d / name).read_bytes())
+        h.update((d / name).read_bytes().replace(b"\r\n", b"\n"))   # line-ending independent (Windows / Linux)
     return h.hexdigest()
 
 
@@ -98,5 +98,5 @@ def fingerprint_all(d: Path = DATA) -> str:
     h = hashlib.sha256()
     for name in ("policy.json", "use_cases.json", "telemetry.csv", "metrics.json", "cohorts.json",
                  "interventions.json", "decision_register.json", "scenarios.json"):
-        h.update((d / name).read_bytes())
+        h.update((d / name).read_bytes().replace(b"\r\n", b"\n"))   # line-ending independent (Windows / Linux)
     return h.hexdigest()

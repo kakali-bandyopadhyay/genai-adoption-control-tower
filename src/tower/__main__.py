@@ -7,14 +7,16 @@
   metrics     the metric and assumption register
   value       total cost of ownership and net value ranges (assumed costs)
   record      append a leadership decision to the decision register
+  trace       one use case step by step: intake, risk tier, evaluation, gate checks, actions, adoption, value, escalation
   build       write out/dashboard.html, out/decision_memo.md, out/decision_log.json
 """
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 
-from . import adoption, data, engine, followup, report, scenarios
+from . import adoption, data, engine, followup, report, scenarios, trace
 from .value import tco
 
 
@@ -38,6 +40,9 @@ def build(out: Path) -> dict:
     (out / "dashboard.html").write_text(report.dashboard(ctx), encoding="utf-8")
     (out / "decision_memo.md").write_text(report.memo(ctx), encoding="utf-8")
     (out / "decision_log.json").write_text(report.decision_log(ctx["decisions"], ctx["policy"], ctx["fingerprint"]), encoding="utf-8")
+    for d in ctx["decisions"]:
+        steps = trace.trace(ctx, d["use_case"])
+        (out / f"trace_{d['use_case']}.md").write_text(trace.as_markdown(steps, d["use_case"], d["name"]), encoding="utf-8")
     return ctx
 
 
@@ -45,8 +50,13 @@ run = build   # backwards-compatible name used by B01 tests
 
 
 def main() -> None:
+    for stream in (sys.stdout, sys.stderr):            # Windows consoles default to a legacy code page
+        try:
+            stream.reconfigure(encoding="utf-8")
+        except (AttributeError, ValueError):
+            pass
     p = argparse.ArgumentParser(prog="python -m tower", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("cmd", choices=["portfolio", "gates", "scenarios", "followup", "metrics", "value", "record", "build"])
+    p.add_argument("cmd", choices=["portfolio", "gates", "scenarios", "followup", "metrics", "value", "record", "trace", "build"])
     p.add_argument("--out", default="out")
     p.add_argument("--use-case"); p.add_argument("--decision"); p.add_argument("--rationale"); p.add_argument("--owner")
     p.add_argument("--by", dest="decided_by"); p.add_argument("--review", default="week 10"); p.add_argument("--review-by")
@@ -61,6 +71,10 @@ def main() -> None:
         print(f"Recorded {e['use_case']} {e['decision']} ({e['review']}) – expect {a.expect} by {e['review_by']}")
         return
     ctx = build(Path(a.out)) if a.cmd == "build" else context()
+    if a.cmd == "trace":
+        ids = [a.use_case] if a.use_case else [d["use_case"] for d in ctx["decisions"]]
+        print("\n\n".join(trace.as_text(trace.trace(ctx, i), i) for i in ids))
+        return
     if a.cmd == "portfolio":
         for u in ctx["portfolio"]:
             print(f"{u['rank']:>2} {u['id']} {u['score']:.2f} {u['tier']:<6} {u['sourcing']:<6} {u['stage']:<18} {u['name']}")
@@ -90,7 +104,7 @@ def main() -> None:
             print(f"{k} {t['sourcing']:<6} total cost ${t['total_cost_usd']:>9,.0f}  hours {t['hours_low']:,.0f}-{t['hours_high']:,.0f}  "
                   f"net ${t['net_low_usd']:,.0f} to ${t['net_high_usd']:,.0f}  (excl. one-off ${t['net_excl_one_off_usd']:,.0f})")
     else:
-        print(f"Wrote {a.out}/dashboard.html, decision_memo.md, decision_log.json (inputs {ctx['fingerprint'][:16]}…)")
+        print(f"Wrote {a.out}/dashboard.html, decision_memo.md, decision_log.json, trace_<use case>.md (inputs {ctx['fingerprint'][:16]}…)")
 
 
 if __name__ == "__main__":

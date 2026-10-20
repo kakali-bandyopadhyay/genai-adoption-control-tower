@@ -5,10 +5,12 @@ import html
 import json
 from datetime import datetime, timezone
 
+from . import trace
 from .value import value
 
 LABEL = ("Personal prototype. Synthetic data and an illustrative policy for a fictional hedge-fund technology centre; "
          "not any firm's use cases, metrics or policy. One baseline (UC02) is a real offline evaluation of the author's own prototype.")
+OPEN_TRACES = ("UC02", "UC03")   # the hedge-fund operations examples: trade breaks and surveillance
 COLOURS = {"EXPAND": "#2e7d32", "FIX": "#b26a00", "PAUSE": "#c62828", "CONTINUE": "#546e7a", "NOT LIVE": "#546e7a"}
 
 
@@ -113,6 +115,14 @@ def dashboard(ctx: dict) -> str:
         f"<tr><td><b>{e(m['name'])}</b></td><td>{e(m['definition'])}</td><td>{e(m['numerator'])} / {e(m['denominator'])}</td>"
         f"<td>{e(m['window'])}</td><td>{e(m['source'])}</td><td>{e(m['owner'])}</td><td><span class='prov'>{e(m['provenance'])}</span></td></tr>"
         for m in ctx["metrics"])
+    trace_html = ""
+    for d in sorted(decisions, key=lambda x: (x["use_case"] not in OPEN_TRACES, x["use_case"])):
+        steps = trace.trace(ctx, d["use_case"])
+        items = "".join(f"<li><b>{e(x['title'])}</b> – {e(x['outcome'])}<ul>" + "".join(f"<li>{e(y)}</li>" for y in x["detail"]) + "</ul></li>"
+                        for x in steps)
+        label = d["decision"] + (f" · {d['fix_type']}" if d.get("fix_type") else "")
+        trace_html += (f"<details class='trace'{' open' if d['use_case'] in OPEN_TRACES else ''}><summary><b>{d['use_case']} · {e(d['name'])}</b>"
+                       f" <span class='sub'>{d['tier']} risk · {e(label)}</span></summary><ol>{items}</ol></details>")
     gate_rows = "".join(f"<tr><td>{t}</td><td>{g['min_eval_pass']:.0%}</td><td>{g['max_override']:.0%}</td><td>{g['min_adoption']:.0%}</td>"
                         f"<td>{'yes' if g.get('human_review_required') else 'per use case'}</td></tr>" for t, g in policy["gates"].items())
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -136,12 +146,16 @@ th{{font-size:12px;color:var(--muted);font-weight:600}} .num{{text-align:right;w
 svg .bar{{stroke:var(--muted);stroke-dasharray:3 3}} .wrap{{overflow-x:auto}} footer{{color:var(--muted);font-size:12px;margin-top:28px}}
 .st.met{{color:var(--good)}} .st.missed{{color:var(--bad)}} .st.open{{color:var(--muted)}} .st-esc{{color:var(--bad)}} td.chg{{font-weight:700;color:var(--accent)}} td.low{{color:var(--bad);font-weight:600}}
 .prov{{font-size:12px;color:var(--muted)}}
+details.trace{{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:8px 0}} details.trace summary{{cursor:pointer}}
+details.trace ol{{margin:8px 0 4px;padding-left:22px}} details.trace li{{margin:3px 0}} details.trace ul{{padding-left:18px;font-size:13px;color:var(--muted)}}
 </style></head><body><main>
 <h1>GenAI Adoption Control Tower</h1><div class="sub">Week 10 portfolio review · policy {e(policy['version'])}</div>
 <div class="label">{e(LABEL)}</div>
-<nav><a href="#decisions">Decisions</a><a href="#followup">Follow-up</a><a href="#adoption">Adoption plan</a><a href="#scenarios">What if</a><a href="#value">Value</a><a href="#portfolio">Portfolio</a><a href="#metrics">Metric register</a></nav>
+<nav><a href="#decisions">Decisions</a><a href="#trace">Workflow trace</a><a href="#followup">Follow-up</a><a href="#adoption">Adoption plan</a><a href="#scenarios">What if</a><a href="#value">Value</a><a href="#portfolio">Portfolio</a><a href="#metrics">Metric register</a></nav>
 <div class="tiles">{tile_html}</div>
 <h2 id="decisions">Decisions this review</h2><p class="lead">Checks run in order: control incidents, then quality, then adoption, then sustained performance.</p><div class="cards">{''.join(cards)}</div>
+<h2 id="trace">Workflow trace: from intake to escalation</h2><p class="lead">Each live use case step by step: priority, risk tier, offline evaluation, weekly gate inputs, the gate checks in order, owned actions, adoption by cohort, value, the decision register and what would change the decision. Trade-break triage and surveillance alert triage are open below.</p>
+{trace_html}
 <h2 id="followup">Follow-up on earlier decisions</h2><p class="lead">What each recorded decision expected, and what happened. Two consecutive misses escalate to the sponsor.</p>
 <div class="wrap"><table><tr><th>Review</th><th>ID</th><th>Decision</th><th>Rationale</th><th>Owner</th><th>Expected</th><th>Actual</th><th>Status</th></tr>{fu}</table></div>
 <h2 id="adoption">Adoption by cohort and the plan to close gaps</h2><p class="lead">Cohorts below their tier's adoption bar are marked; every intervention has an owner, a due date and a success measure.</p>

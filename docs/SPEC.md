@@ -1,4 +1,4 @@
-# GenAI Adoption Control Tower – specification v0.2
+# GenAI Adoption Control Tower – specification v0.3
 
 **Purpose:** show, end to end, how a technology centre can move GenAI from pilots to embedded use with measurable value and risk controls built in from the start.
 
@@ -22,11 +22,12 @@
 | R12 | Total cost of ownership with a sensitivity range on minutes saved | `value.tco`, `policy.json` costs |
 | R13 | Adoption by cohort and interventions with owner, due date and success measure | `adoption`, `data/cohorts.json`, `data/interventions.json` |
 | R14 | Decision register with expected outcomes; follow-up and escalation after repeat misses | `followup`, `data/decision_register.json`, `record` |
+| R15 | Workflow trace per use case: intake, risk tier and threshold status, offline evaluation, live gate inputs with metric provenance (definition, source, owner, synthetic / assumed / measured), gate checks in order, actions, adoption, value, register with the escalation condition stated, what would change the decision – consistent with the gate and follow-up | `trace`, dashboard section, `out/trace_<id>.md`, [WORKFLOW_TRACE.md](WORKFLOW_TRACE.md) |
 
 ## Definition of done (gate before the repo goes public)
 
 - [x] Runs end to end from a clean GitHub checkout; README steps verified
-- [x] pytest passes (35), no hard-coded results
+- [x] pytest passes (44), no hard-coded results
 - [x] Data labelled synthetic; policy labelled illustrative; no firm named
 - [x] Diagram, ADRs, FINDINGS with numbers from actual runs
 - [x] Every commit scanned for firm or application terms, contact details and secrets; `.env` never committed
