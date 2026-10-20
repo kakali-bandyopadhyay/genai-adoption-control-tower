@@ -8,6 +8,8 @@ A working prototype of how a hedge-fund technology centre can run a **GenAI port
 
 ![Dashboard](docs/dashboard.png)
 
+**[Live dashboard](https://kakali-bandyopadhyay.github.io/genai-adoption-control-tower/)** (synthetic data)
+
 ## How it works
 
 ```mermaid
