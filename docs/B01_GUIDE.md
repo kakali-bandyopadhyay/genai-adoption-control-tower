@@ -4,7 +4,7 @@
 **Starting point:** empty repo. Earlier personal builds supply one real input: the ops-exception agent's offline evaluation (18 cases × 3 runs, 54/54, about $0.0018 per decision).
 **Goal:** show how a GenAI portfolio moves from pilots to embedded use with measurable value and controls built in: prioritise, gate, track, decide.
 
-> Personal prototype. Synthetic data, illustrative policy, fictional hedge-fund technology centre. Not any firm's use cases, metrics or policy.
+> Personal prototype. Synthetic data, illustrative policy, simulated hedge-fund technology centre. Not any firm's use cases, metrics or policy.
 
 ---
 

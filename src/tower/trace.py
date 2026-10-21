@@ -153,7 +153,7 @@ def as_text(steps: list[dict], uc_id: str) -> str:
 
 def as_markdown(steps: list[dict], uc_id: str, name: str) -> str:
     out = [f"# Workflow trace – {uc_id} {name}", "",
-           "> Personal prototype. Synthetic data, illustrative policy, fictional hedge-fund technology centre.", ""]
+           "> Personal prototype. Synthetic data, illustrative policy, simulated hedge-fund technology centre.", ""]
     for s in steps:
         out.append(f"**{s['n']}. {s['title']}** – {s['outcome']}")
         out += [f"- {x}" for x in s["detail"]] + [""]

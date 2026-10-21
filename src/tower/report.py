@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from . import trace
 from .value import value
 
-LABEL = ("Personal prototype. Synthetic data and an illustrative policy for a fictional hedge-fund technology centre; "
+LABEL = ("Personal prototype. Synthetic data and an illustrative policy for a simulated hedge-fund technology centre; "
          "not any firm's use cases, metrics or policy. One baseline (UC02) is a real offline evaluation of the author's own prototype.")
 OPEN_TRACES = ("UC02", "UC03")   # the hedge-fund operations examples: trade breaks and surveillance
 COLOURS = {"EXPAND": "#2e7d32", "FIX": "#b26a00", "PAUSE": "#c62828", "CONTINUE": "#546e7a", "NOT LIVE": "#546e7a"}

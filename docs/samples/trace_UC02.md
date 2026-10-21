@@ -1,6 +1,6 @@
 # Workflow trace – UC02 Trade-break triage assistant
 
-> Personal prototype. Synthetic data, illustrative policy, fictional hedge-fund technology centre.
+> Personal prototype. Synthetic data, illustrative policy, simulated hedge-fund technology centre.
 
 **1. Intake and priority** – score 4.40, rank 1 of 9
 - Trade-break triage assistant (Operations): Classify settlement and reconciliation breaks, propose the next action and route to the owner; actions behind an approval gate.

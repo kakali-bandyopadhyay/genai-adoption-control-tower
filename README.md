@@ -2,7 +2,7 @@
 
 A working prototype of how a hedge-fund technology centre can run a **GenAI portfolio from pilot to production**: prioritise use cases, choose build, buy or hybrid, put risk-tiered stage gates in front of every expansion, track adoption and value weekly, and turn the numbers into an **expand, fix or pause** decision that leadership can act on – then **check at the next review whether each decision delivered**.
 
-> **Disclaimer.** Personal prototype. All use cases, telemetry and thresholds are **synthetic and illustrative**, written for a fictional hedge-fund technology centre. Nothing here represents any firm's use cases, metrics, policies or views. One input is real: the offline evaluation baseline for UC02 comes from the author's own ops-exception agent prototype (18 cases × 3 runs, 54/54, about $0.0018 per decision).
+> **Disclaimer.** Personal prototype. All use cases, telemetry and thresholds are **synthetic and illustrative**, written for a simulated hedge-fund technology centre. Nothing here represents any firm's use cases, metrics, policies or views. One input is real: the offline evaluation baseline for UC02 comes from the author's own ops-exception agent prototype (18 cases × 3 runs, 54/54, about $0.0018 per decision).
 
 **Python 3.11+ · standard library only · pytest (44 tests) · no external services**
 
@@ -145,7 +145,7 @@ docs/        SPEC, FINDINGS, WORKFLOW_TRACE, samples/ (generated traces), B01 an
 
 - **Real-world impact.** Telemetry, cohorts and decision history are synthetic with planted conditions; no adoption, time saving or value has been measured. The one measured input is an offline evaluation of a personal prototype.
 - **Validated thresholds or policy.** Gate bars, weights, costs and the hourly rate are assumptions in `policy.json`; in practice the risk, compliance and model-risk owners would set and approve them.
-- **Any firm's practice.** The technology centre, use cases and teams are fictional.
+- **Any firm's practice.** The technology centre, use cases and teams are simulated.
 - **Production readiness.** Weekly aggregates rather than event-level logs; no integration with usage logs, evaluation harnesses or incident registers; static, pre-defined scenarios.
 - **Value.** Hours saved rely on an assumed minutes-per-task (shown with a ±30% range); net value is illustrative.
 

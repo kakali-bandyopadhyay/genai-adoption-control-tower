@@ -1,6 +1,6 @@
 # Workflow trace – UC03 Surveillance alert triage
 
-> Personal prototype. Synthetic data, illustrative policy, fictional hedge-fund technology centre.
+> Personal prototype. Synthetic data, illustrative policy, simulated hedge-fund technology centre.
 
 **1. Intake and priority** – score 3.55, rank 5 of 9
 - Surveillance alert triage (Compliance): Pre-sort trade and communications surveillance alerts, draft a disposition rationale for an analyst to approve.

@@ -1,6 +1,6 @@
 # Workflow trace – UC01 Research document summaries
 
-> Personal prototype. Synthetic data, illustrative policy, fictional hedge-fund technology centre.
+> Personal prototype. Synthetic data, illustrative policy, simulated hedge-fund technology centre.
 
 **1. Intake and priority** – score 3.50, rank 6 of 9
 - Research document summaries (Research): Summarise filings and earnings-call transcripts into a standard research note template with citations.

@@ -1,6 +1,6 @@
 # Workflow trace – how a hedge-fund operations use case moves from intake to escalation
 
-> Personal prototype. Synthetic data, illustrative policy, fictional hedge-fund technology centre. Not any firm's use cases, metrics or policy. One input is real: UC02's offline evaluation baseline from the author's own ops-exception agent prototype.
+> Personal prototype. Synthetic data, illustrative policy, simulated hedge-fund technology centre. Not any firm's use cases, metrics or policy. One input is real: UC02's offline evaluation baseline from the author's own ops-exception agent prototype.
 
 `python -m tower trace --use-case UC02` prints one use case's full path; `python -m tower build` writes `out/trace_<use case>.md` for every live use case, and the dashboard has a **Workflow trace** section (trade-break triage and surveillance alert triage open by default). Every step is computed from the same inputs as the dashboard and memo, and tests check the trace agrees with the gate decision and the follow-up. Each gate metric is shown with its definition, numerator and denominator, window, source, owner and provenance (synthetic, assumed or measured), and the policy thresholds are marked as illustrative assumptions. Generated samples: [samples/trace_UC02.md](samples/trace_UC02.md), [samples/trace_UC03.md](samples/trace_UC03.md), [samples/trace_UC01.md](samples/trace_UC01.md) (escalated).
 
